@@ -8,7 +8,7 @@ A simple HTML + JavaScript demo that visualizes the difference between **debounc
 - Visual **counters** to show how many times each event handler fires.
 
 ## 🚀 Live Demo
-🔗 **[View Demo Here](https://safeerkilinadan.github.io/debounce-throttle-demo/)**  
+🔗 **[View Demo Here](https://safeerkilinadan.github.io/debounce-throatle-demo/)**  
 
 
 ## 📂 Files
