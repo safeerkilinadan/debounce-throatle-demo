@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Debounce vs Throttle Demo</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <h1>🧩 Debounce & Throttle Demo</h1>
+
+  <div class="section">
+    <h2>🔁 Debounce Example (Search Input)</h2>
+    <p>Type below — the handler triggers only <strong>after you stop typing</strong> for 500ms.</p>
+    <input id="searchBox" type="text" placeholder="Start typing..." />
+    <div class="output" id="debounceOutput"></div>
+    <div class="counter">Debounce Calls: <span id="debounceCount">0</span></div>
+  </div>
+
+  <div class="section">
+    <h2>⚙️ Throttle Example (Scroll Box)</h2>
+    <p>Scroll inside the box — the handler triggers only <strong>once every second</strong>.</p>
+    <div class="scroll-box" id="scrollBox">
+      <div class="scroll-content"></div>
+    </div>
+    <div class="output" id="throttleOutput"></div>
+    <div class="counter">Throttle Calls: <span id="throttleCount">0</span></div>
+  </div>
+
+  <footer>
+    Made with ❤️ by <a href="https://github.com/safeerkilinadan/debounce-throatle-demo" target="_blank">Safeer Kilinadan</a>
+  </footer>
+
+  <script>
+    // Debounce function
+    function debounce(fn, delay) {
+      let timer;
+      return function(...args) {
+        clearTimeout(timer);
+        timer = setTimeout(() => fn.apply(this, args), delay);
+      };
+    }
+
+    // Throttle function
+    function throttle(fn, limit) {
+      let inThrottle;
+      return function(...args) {
+        if (!inThrottle) {
+          fn.apply(this, args);
+          inThrottle = true;
+          setTimeout(() => (inThrottle = false), limit);
+        }
+      };
+    }
+
+    // Debounce Example
+    const debounceOutput = document.getElementById("debounceOutput");
+    const debounceCount = document.getElementById("debounceCount");
+    let debounceCalls = 0;
+
+    function handleSearch(e) {
+      debounceCalls++;
+      debounceCount.textContent = debounceCalls;
+      debounceOutput.textContent = "Searching for: " + e.target.value;
+    }
+
+    const debouncedSearch = debounce(handleSearch, 500);
+    document.getElementById("searchBox").addEventListener("input", debouncedSearch);
+
+    // Throttle Example
+    const scrollBox = document.getElementById("scrollBox");
+    const throttleOutput = document.getElementById("throttleOutput");
+    const throttleCount = document.getElementById("throttleCount");
+    let throttleCalls = 0;
+
+    function handleScroll(e) {
+      throttleCalls++;
+      throttleCount.textContent = throttleCalls;
+      throttleOutput.textContent = "Scroll Top Position: " + e.target.scrollTop;
+      throttleOutput.style.color = throttleCalls % 2 === 0 ? '#007acc' : '#d6336c';
+    }
+
+    const throttledScroll = throttle(handleScroll, 1000);
+    scrollBox.addEventListener("scroll", throttledScroll);
+  </script>
+</body>
+</html>

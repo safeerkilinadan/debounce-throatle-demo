@@ -1,0 +1,18 @@
+{
+  "name": "debounce-throttle-demo",
+  "version": "1.0.0",
+  "description": "Demo page for Debounce vs Throttle implemented with pure JavaScript.",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve .",
+    "predeploy": "npm run build || echo 'No build step, skipping...'",
+    "deploy": "gh-pages -d ."
+  },
+  "keywords": ["debounce", "throttle", "javascript", "demo"],
+  "author": "Safeer Kilinadan",
+  "license": "MIT",
+  "devDependencies": {
+    "gh-pages": "^6.0.0",
+    "serve": "^14.0.1"
+  }
+}
